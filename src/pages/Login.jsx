@@ -1,11 +1,29 @@
-import React from "react";
 import bannerLeftImage from '@/assets/images/banner-left.png';
 import bannerRightImage from '@/assets/images/banner-right.png';
 import mainImage from '@/assets/images/main.png';
 import googleIcon from '@/assets/images/google.png';
 import microsoftIcon from '@/assets/images/microsoft.png';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleGooleLogin = async() => {
+    const provider = new GoogleAuthProvider()
+    const result = await signInWithPopup(auth, provider)
+    const user =  result.user
+
+    if(user.uid && user.accessToken) {
+      navigate("/project")
+    }
+  }
+  // return (
+  //   <>
+  //     <button onClick={handleGooleLogin}>Login with Google</button>
+  //   </>
+  // )
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-100 to-pink-200 px-2 relative overflow-hidden">
       <div className="flex flex-col justify-center items-center w-full max-w-6xl gap-8 z-10">
@@ -37,7 +55,7 @@ const Login = () => {
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
           <div className="flex gap-4 w-full mb-2">
-            <button className="flex-1 flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 bg-white hover:bg-gray-100">
+            <button onClick={handleGooleLogin} className="flex-1 flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 bg-white hover:bg-gray-100">
               <img src={googleIcon} alt="Google" className="w-5 h-5" />
               Google
             </button>

@@ -38,6 +38,7 @@ const MeetingVideo = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-2">
         <h1 className="text-2xl font-bold text-[#76B7E0]">Họp Video</h1>
+        <button className="bg-[#76B7E0] text-white px-4 py-2 rounded font-semibold">+ Tạo cuộc họp mới</button>
       </div>
 
       {/* Tabs */}
